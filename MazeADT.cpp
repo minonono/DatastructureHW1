@@ -32,7 +32,9 @@ void Maze::MazeSolve(){
         }else{
             forwarded = false;
             while(curPos.dir < 8){
-                if(maze[curPos.g + move[curPos.dir].vert][curPos.h + move[curPos.dir].horiz] == 0){
+                int i = curPos.g + move[curPos.dir].vert;
+                int j = curPos.h + move[curPos.dir].horiz;
+                if(!maze[i][j] && !mark[i][j]){
                     stack.push(curPos);
                     Move(curPos, move[curPos.dir].vert, move[curPos.dir].horiz);
                     forwarded = true;
@@ -56,7 +58,6 @@ void Maze::Move(Position & curPos, int i, int j){
     curPos.g += i;
     curPos.h += j;
     curPos.dir = 0;
-    maze[curPos.g][curPos.h] = 1;
     mark[curPos.g][curPos.h] = 1;
 }
 
